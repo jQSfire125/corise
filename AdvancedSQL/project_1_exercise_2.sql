@@ -1,23 +1,21 @@
+/*  Project 2 - Exercise 2
+    The customers cte gest the data from customer_data and customer_address
+    to get the required fields. It also standardizes the format of city and state.
 
-/*
-Project 2 - Exercise 2
-The customers cte gest the data from customer_data and customer_address
-to get the required fields. It also standardizes the format of city and state.
+    The cities cte chooses only one row per city-state pair arbitrarily and standardizes
+    the format of city and state.
 
-The cities cte chooses only one row per city-state pair arbitrarily and standardizes
-the format of city and state.
+    In the customers_elegible cte we join to get the customers for who we have 
+    geo_location data.
+    
+    In customers_survey we get the top 3 preferences (tags) alfabetically by customer. 
+    Then we pivot by preference in customers_survey_pivoted.
 
-In the customers_elegible cte we join to get the customers for who we have geo_location data.
+    In all_recipe_suggestions we get for each recipe its tags, and in
+    one_recipe_suggestion we narrow it down to one recipe per tag using any_value.
 
-In customers_survey we get the top 3 preferences (tags) alfabetically by customer. 
-Then we pivot by preference in customers_survey_pivoted.
-
-In all_recipe_suggestions we get for each recipe its tags, and in one_recipe_suggestion
-we narrow it down to one recipe per tag using any_value.
-
-The final cte gets the required fields together by pulling from customers_elegible, 
-customers_survey_pivoted and one_recipe_suggestion.
-*/
+    The final cte gets the required fields together by pulling from customers_elegible, 
+    customers_survey_pivoted and one_recipe_suggestion. */
 
 with customers as (
     select 
