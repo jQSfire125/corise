@@ -1,20 +1,18 @@
-/*
-Project 1 - Exercise 1
-The customers cte gest the data from customer_data and customer_address
-to get the required fields. It also standardizes the format of city and state.
+/*  Project 1 - Exercise 1
+    The customers cte gest the data from customer_data and customer_address
+    to get the required fields. It also standardizes the format of city and state.
 
-The cities cte chooses only one row per city-state pair arbitrarily and standardizes
-the format of city and state.
+    The cities cte chooses only one row per city-state pair arbitrarily and standardizes
+    the format of city and state.
 
-The customers_geo cte adds the geo_location from cities to the customers data.
+    The customers_geo cte adds the geo_location from cities to the customers data.
 
-The suppliers table standardizes the city and state and gets the geo_location data as
-well.
+    The suppliers table standardizes the city and state and gets the geo_location data 
+    as well.
 
-The final table uses cross join to match all 10 suppliers with each customer and
-chooses the supplier that is closest (based on geo_location). It also filters
-for customers for which we don't have geo_location data.
-*/
+    The final table uses cross join to match all 10 suppliers with each customer and
+    chooses the supplier that is closest (based on geo_location). It also filters
+    for customers for which we don't have geo_location data. */
 
 with customers as (
     select 
