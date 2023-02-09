@@ -66,18 +66,18 @@ with
     chicago_store as ( 
         select 
             geo_location
-        from vk_data.resources.us_cities 
+        from clean_us_cities 
         where 
-            city_name = 'CHICAGO' 
+            city_name = 'Chicago' 
             and state_abbr = 'IL'
 ),
 
     gary_store as (
         select 
             geo_location
-        from vk_data.resources.us_cities 
+        from clean_us_cities 
         where 
-            city_name = 'GARY' 
+            city_name = 'Gary' 
             and state_abbr = 'IN'
 )
 
