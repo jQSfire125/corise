@@ -54,3 +54,6 @@ with
 select * from results
 order by last_order_date desc
 limit 100
+
+/* My feedback on the candidate's work is here: 
+https://github.com/jQSfire125/corise/blob/main/AdvancedSQL/project_4_exercise_2.md */
