@@ -1,3 +1,11 @@
+/* General Commments:
+    I am trying to follow the sample output provided.
+    That means using part price to rank top orders 
+    and having total spent be the sum of those 3 parts.
+    
+    I believe the correct way would be to use order total for
+    ranking and total spent. */
+
 with 
     automobile_customers as (
         select
