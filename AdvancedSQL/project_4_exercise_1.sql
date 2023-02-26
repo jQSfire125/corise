@@ -23,13 +23,13 @@ with
             ,   lineitem.l_partkey
             ,   lineitem.l_quantity
             ,   lineitem.l_extendedprice
-            ,   row_number () over (partition by c_custkey order by l_extendedprice desc) as rank --most expensive parts
+            ,   row_number () over (partition by c_custkey order by l_extendedprice desc) as price_rank --most expensive parts
         from automobile_customers
         inner join urgent_orders 
             on automobile_customers.c_custkey = urgent_orders.o_custkey
         inner join snowflake_sample_data.tpch_sf1.lineitem 
             on urgent_orders.o_orderkey = lineitem.l_orderkey
-        qualify rank <= 3 --only the 3 most expensive parts overall
+        qualify price_rank <= 3 --only the 3 most expensive parts overall
 ),
 
     results as (
@@ -38,15 +38,15 @@ with
             ,   max(o_orderdate) as last_order_date
             ,   listagg(o_orderkey, ', ') as order_numbers
             ,   sum(l_extendedprice) as total_spent --total spent on those 3 most expensive parts
-            ,   max(case when rank = 1 then l_partkey end) as part_1_key
-            ,   max(case when rank = 1 then l_quantity end) as part_1_quantity
-            ,   max(case when rank = 1 then l_extendedprice end) as part_1_total_spent
-            ,   max(case when rank = 2 then l_partkey end) as part_2_key
-            ,   max(case when rank = 2 then l_quantity end) as part_2_quantity
-            ,   max(case when rank = 2 then l_extendedprice end) as part_2_total_spent
-            ,   max(case when rank = 3 then l_partkey end) as part_3_key
-            ,   max(case when rank = 3 then l_quantity end) as part_3_quantity
-            ,   max(case when rank = 3 then l_extendedprice end) as part_3_total_spent
+            ,   max(case when price_rank = 1 then l_partkey end) as part_1_key
+            ,   max(case when price_rank = 1 then l_quantity end) as part_1_quantity
+            ,   max(case when price_rank = 1 then l_extendedprice end) as part_1_total_spent
+            ,   max(case when price_rank = 2 then l_partkey end) as part_2_key
+            ,   max(case when price_rank = 2 then l_quantity end) as part_2_quantity
+            ,   max(case when price_rank = 2 then l_extendedprice end) as part_2_total_spent
+            ,   max(case when price_rank = 3 then l_partkey end) as part_3_key
+            ,   max(case when price_rank = 3 then l_quantity end) as part_3_quantity
+            ,   max(case when price_rank = 3 then l_extendedprice end) as part_3_total_spent
         from orders_line_item
         group by c_custkey
 )
